@@ -1,6 +1,6 @@
-## 📕 API de Atividades 
+## 📕 Controle de Atividades - API
 
-API Flask para gerenciamento de atividades acadêmicas, integrando serviços de professores e disciplinas.
+Este repositório contém a API de Controle de Atividades, responsável por gerenciar as atividades vinculadas aos professores. A API permite cadastrar, listar e gerenciar atividades associadas aos IDs de professores fornecidos pela API do Sistema de Gerenciamento.
 
 ## 📋 Estrutura do Projeto
 ```
@@ -22,72 +22,34 @@ API_Atividade/
 ├── requirements.txt
 └── README.md
 ```
+---
 
+## 📖 Explicação da Arquitetura Utilizada
 
-## 🚀 Como Executar
+* Padrão de Arquitetura:
+Estruturada com base no padrão MVC (Model-View-Controller), separando a lógica de dados, apresentação e controle.
 
-### Pré-requisitos
-- Python 3.8+
-- Pip
-- PostgreSQL (ou outro banco de dados configurável)
+* Banco de Dados:
+Utiliza SQLite para a persistência de dados sobre as atividades e os vínculos com os professores.
+
+* Integração com Sistema de Gerenciamento:
+Esta API consome dados da API de Sistema de Gerenciamento, principalmente os IDs de professores, garantindo a consistência dos vínculos das atividades com os docentes.
+
+* Rotas:
+Implementa endpoints RESTful com suporte aos métodos HTTP GET e POST para manipulação dos recursos de atividades.
 
 ---
-### Instalação
-```bash
-git clone https://github.com/Mpfg05/API_Atividade.git
-cd API_Atividade
-pip install -r requirements.txt
-```
 
-##🧩 Configuração
-Renomeie .env.example para .env e configure as variáveis:
+## 🔍 Descrição do Ecossistema de Microserviços
+Este projeto integra um ecossistema de microserviços composto pelas seguintes APIs:
 
-env
-DATABASE_URL=postgresql://user:password@localhost:5432/atividade_db
-FLASK_SECRET_KEY=sua_chave_secreta_aqui
+* Sistema de Gerenciamento:
+Fornece dados de alunos, professores e turmas para os outros microserviços.
 
----
-## Iniciar Serviços
-Abra dois terminais:
+* Reservas:
+Gerencia a reserva de salas de aula, integrando-se com a API do Sistema de Gerenciamento.
 
-Terminal 1 (Atividade Service):
+* Atividades (esta API):
+Responsável pelo controle de atividades associadas aos professores, utilizando os IDs fornecidos pela API de Sistema de Gerenciamento.
 
-```bash
-cd atividade_service
-flask run --port 5001
-Terminal 2 (Pessoa Service):
-```
-
-```bash
-cd pessoa_service
-flask run --port 5002
-```
----
-## 🔍 Endpoints Principais
--Atividade Service (:5001)
-```POST /atividades - Cria nova atividade```
-
-```GET /atividades/<id> - Busca atividade por ID```
-
-```GET /atividades/professor/<id_professor> - Lista atividades por professor```
-
--Pessoa Service (:5002)
-```POST /professores - Cadastra novo professor```
-
-```GET /professores/<id> - Busca professor por ID```
-
-## 🤝 Integração entre Serviços
-A API de Atividades consulta a API de Pessoas para:
-
-Validar existência de professores
-
-Verificar se professor leciona disciplina
-
-## 🛠️ Tecnologias Utilizadas
-Flask
-
-Flask-SQLAlchemy
-
-PostgreSQL
-
-Python-Dotenv
+A integração entre os microserviços ocorre através de comunicação via APIs RESTful, promovendo uma arquitetura modular e escalável, facilitando a manutenção e evolução do sistema.
