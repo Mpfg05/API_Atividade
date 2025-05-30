@@ -1,16 +1,16 @@
 import requests
 
-PESSOA_SERVICE_URL = "http://localhost:5001/pessoas"
-
 class PessoaServiceClient:
+    BASE_URL = 'http://localhost:5001'  
+
     @staticmethod
-    def verificar_leciona(id_professor, id_disciplina):
-        url = f"{PESSOA_SERVICE_URL}/leciona/{id_professor}/{id_disciplina}"
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            data = response.json()
-            return data.get('leciona', False) if data.get('isok') else False
-        except requests.RequestException as e:
-            print(f"Erro ao acessar o pessoa_service: {e}")
-            return False
+    def obter_professor(professor_id):
+        resp = requests.get(f"{PessoaServiceClient.BASE_URL}/professores/{professor_id}")
+        if resp.status_code == 200:
+            return resp.json()
+        return None
+
+    @staticmethod
+    def verificar_leciona(professor_id, disciplina_id):
+        resp = requests.get(f"{PessoaServiceClient.BASE_URL}/professores/{professor_id}/leciona/{disciplina_id}")
+        return resp.status_code == 200
