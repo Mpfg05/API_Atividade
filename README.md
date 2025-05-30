@@ -3,6 +3,7 @@
 API Flask para gerenciamento de atividades acadêmicas, integrando serviços de professores e disciplinas.
 
 ## 📋 Estrutura do Projeto
+```
 API_Atividade/
 ├── atividade_service/
 │ ├── controllers/
@@ -20,7 +21,7 @@ API_Atividade/
 │ └── config.py
 ├── requirements.txt
 └── README.md
-
+```
 
 
 ## 🚀 Como Executar
