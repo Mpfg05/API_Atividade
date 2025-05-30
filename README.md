@@ -1,4 +1,4 @@
-## API de Atividades 
+## 📕 API de Atividades 
 
 API Flask para gerenciamento de atividades acadêmicas, integrando serviços de professores e disciplinas.
 
@@ -39,7 +39,7 @@ cd API_Atividade
 pip install -r requirements.txt
 ```
 
-## Configuração
+##🧩 Configuração
 Renomeie .env.example para .env e configure as variáveis:
 
 env
